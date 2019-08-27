@@ -119,34 +119,6 @@ public class Board {
 	}
 
 	/**
-	 * Checks if a list of tiles still contains colors to swap
-	 * 
-	 * @param list
-	 *            List of Tiles
-	 * @param index
-	 *            Index to start searching from
-	 * @param color
-	 *            Color to swap to
-	 * @return True if there are more colors to swap
-	 */
-	private boolean containsOpColor(ArrayList<Tile> list, int index,
-			String color) {
-		for (int i = index; i < list.size(); i++) {
-			String curColor = list.get(i).getColor();
-
-			if (curColor.equals("g") || curColor.equals("y")) {
-				return false;
-			}
-
-			if (curColor.equals(color)) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-	/**
 	 * Finds positions that a color can place at and puts them into the board
 	 * 
 	 * @param color
