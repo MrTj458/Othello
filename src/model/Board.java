@@ -113,6 +113,7 @@ public class Board {
 				for(int j = 0; j < swapList.size(); j++) {
 					board[swapList.get(j).getRow()][swapList.get(j).getCol()] = color;
 				}
+				// Swapped all colors return to break out of method
 				return;
 			}
 		}

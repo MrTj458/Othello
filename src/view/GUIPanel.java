@@ -20,6 +20,7 @@ import controller.OthelloController;
  *
  */
 public class GUIPanel extends JPanel {
+	private static final long serialVersionUID = 1L;
 	private OthelloController baseController;
 	private JButton[][] buttons;
 	private JLabel currentPlayerLbl;
