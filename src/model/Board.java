@@ -83,32 +83,36 @@ public class Board {
 	 *            The color to swap to
 	 */
 	private void flipColors(ArrayList<Tile> list, String color) {
-		// Get the opposite of the color that was passed in
 		String opColor;
 		if (color.equals("w")) {
 			opColor = "b";
 		} else {
 			opColor = "w";
 		}
-
-		// Set the clicked position to the new color
+		
+		// Swap clicked tile
 		board[list.get(0).getRow()][list.get(0).getCol()] = color;
-
+		
+		ArrayList<Tile> swapList = new ArrayList<Tile>();
+		// Loop through inputed list
 		for (int i = 1; i < list.size(); i++) {
-			String curColor = list.get(i).getColor();
-
-			// Stop if reached a blank spot
-			if (curColor.equals("g") || curColor.equals("y")) {
+			// If the tile is the opposite color add it to the list to get swapped
+			if (list.get(i).getColor().equals(opColor)) {
+				swapList.add(list.get(i));
+			}
+			
+			// If the list hits a g or y tile before the inputed color again, return without swapping colors
+			if (list.get(i).getColor().equals("g") || list.get(i).getColor().equals("y")) {
 				return;
 			}
-
-			// Swap the color
-			if (curColor.equals(opColor) && containsOpColor(list, i, color)) {
-				board[list.get(i).getRow()][list.get(i).getCol()] = color;
-			} else {
+			
+			// If the list runs into the inputed color swap all of the tiles in the swapList
+			if (list.get(i).getColor().equals(color)) {
+				for(int j = 0; j < swapList.size(); j++) {
+					board[swapList.get(j).getRow()][swapList.get(j).getCol()] = color;
+				}
 				return;
 			}
-
 		}
 	}
 
