@@ -10,9 +10,11 @@ import java.util.ArrayList;
  */
 public class Board {
 	private String[][] board;
+	private ArrayIterator iterator;
 
 	public Board() {
 		board = new String[8][8];
+		iterator = new ArrayIterator();
 
 		setupBoard();
 	}
@@ -62,14 +64,14 @@ public class Board {
 			return false;
 		}
 
-		flipColors(vDown(r, c), color);
-		flipColors(vUp(r, c), color);
-		flipColors(hRight(r, c), color);
-		flipColors(hLeft(r, c), color);
-		flipColors(dRightDown(r, c), color);
-		flipColors(dRightUp(r, c), color);
-		flipColors(dLeftDown(r, c), color);
-		flipColors(dLeftUp(r, c), color);
+		flipColors(iterator.vDown(r, c, board), color);
+		flipColors(iterator.vUp(r, c, board), color);
+		flipColors(iterator.hRight(r, c, board), color);
+		flipColors(iterator.hLeft(r, c, board), color);
+		flipColors(iterator.dRightDown(r, c, board), color);
+		flipColors(iterator.dRightUp(r, c, board), color);
+		flipColors(iterator.dLeftDown(r, c, board), color);
+		flipColors(iterator.dLeftUp(r, c, board), color);
 
 		return true;
 	}
@@ -169,35 +171,35 @@ public class Board {
 				}
 
 				// Check all directions
-				if (isPlaceable(vDown(r, c), color)) {
+				if (isPlaceable(iterator.vDown(r, c, board), color)) {
 					board[r][c] = "y";
 				}
 
-				if (isPlaceable(vUp(r, c), color)) {
+				if (isPlaceable(iterator.vUp(r, c, board), color)) {
 					board[r][c] = "y";
 				}
 
-				if (isPlaceable(hRight(r, c), color)) {
+				if (isPlaceable(iterator.hRight(r, c, board), color)) {
 					board[r][c] = "y";
 				}
 
-				if (isPlaceable(hLeft(r, c), color)) {
+				if (isPlaceable(iterator.hLeft(r, c, board), color)) {
 					board[r][c] = "y";
 				}
 
-				if (isPlaceable(dRightDown(r, c), color)) {
+				if (isPlaceable(iterator.dRightDown(r, c, board), color)) {
 					board[r][c] = "y";
 				}
 
-				if (isPlaceable(dRightUp(r, c), color)) {
+				if (isPlaceable(iterator.dRightUp(r, c, board), color)) {
 					board[r][c] = "y";
 				}
 
-				if (isPlaceable(dLeftDown(r, c), color)) {
+				if (isPlaceable(iterator.dLeftDown(r, c, board), color)) {
 					board[r][c] = "y";
 				}
 
-				if (isPlaceable(dLeftUp(r, c), color)) {
+				if (isPlaceable(iterator.dLeftUp(r, c, board), color)) {
 					board[r][c] = "y";
 				}
 
@@ -268,180 +270,6 @@ public class Board {
 		}
 
 		return false;
-	}
-
-	// Directions
-
-	/**
-	 * Check vertically downwards
-	 * 
-	 * @param r
-	 *            row
-	 * @param c
-	 *            column
-	 * @return List of positions
-	 */
-	private ArrayList<Tile> vDown(int r, int c) {
-		ArrayList<Tile> positions = new ArrayList<Tile>();
-
-		while (r < board[0].length) {
-			positions.add(new Tile(r, c, board[r][c]));
-
-			r++;
-		}
-
-		return positions;
-	}
-
-	/**
-	 * Check vertically Upwards
-	 * 
-	 * @param r
-	 *            row
-	 * @param c
-	 *            column
-	 * @return List of positions
-	 */
-	private ArrayList<Tile> vUp(int r, int c) {
-		ArrayList<Tile> positions = new ArrayList<Tile>();
-
-		while (r >= 0) {
-			positions.add(new Tile(r, c, board[r][c]));
-
-			r--;
-		}
-
-		return positions;
-	}
-
-	/**
-	 * Check horizontally to the right
-	 * 
-	 * @param r
-	 *            row
-	 * @param c
-	 *            column
-	 * @return List of positions
-	 */
-	private ArrayList<Tile> hRight(int r, int c) {
-		ArrayList<Tile> positions = new ArrayList<Tile>();
-
-		while (c < board.length) {
-			positions.add(new Tile(r, c, board[r][c]));
-
-			c++;
-		}
-
-		return positions;
-	}
-
-	/**
-	 * Check horizontally to the left
-	 * 
-	 * @param r
-	 *            row
-	 * @param c
-	 *            column
-	 * @return List of positions
-	 */
-	private ArrayList<Tile> hLeft(int r, int c) {
-		ArrayList<Tile> positions = new ArrayList<Tile>();
-
-		while (c >= 0) {
-			positions.add(new Tile(r, c, board[r][c]));
-
-			c--;
-		}
-
-		return positions;
-	}
-
-	/**
-	 * Check diagonally down to the right
-	 * 
-	 * @param r
-	 *            row
-	 * @param c
-	 *            column
-	 * @return List of positions
-	 */
-	private ArrayList<Tile> dRightDown(int r, int c) {
-		ArrayList<Tile> positions = new ArrayList<Tile>();
-
-		while (r != board[0].length && c != board.length) {
-			positions.add(new Tile(r, c, board[r][c]));
-
-			r++;
-			c++;
-		}
-
-		return positions;
-	}
-
-	/**
-	 * Check diagonally up to the right
-	 * 
-	 * @param r
-	 *            row
-	 * @param c
-	 *            column
-	 * @return List of positions
-	 */
-	private ArrayList<Tile> dRightUp(int r, int c) {
-		ArrayList<Tile> positions = new ArrayList<Tile>();
-
-		while (r != -1 && c != board.length) {
-			positions.add(new Tile(r, c, board[r][c]));
-
-			r--;
-			c++;
-		}
-
-		return positions;
-	}
-
-	/**
-	 * Check diagonally down to the left
-	 * 
-	 * @param r
-	 *            row
-	 * @param c
-	 *            column
-	 * @return List of positions
-	 */
-	private ArrayList<Tile> dLeftDown(int r, int c) {
-		ArrayList<Tile> positions = new ArrayList<Tile>();
-
-		while (r != board[0].length && c != -1) {
-			positions.add(new Tile(r, c, board[r][c]));
-
-			c--;
-			r++;
-		}
-
-		return positions;
-	}
-
-	/**
-	 * Check diagonally up to the left
-	 * 
-	 * @param r
-	 *            row
-	 * @param c
-	 *            column
-	 * @return List of positions
-	 */
-	private ArrayList<Tile> dLeftUp(int r, int c) {
-		ArrayList<Tile> positions = new ArrayList<Tile>();
-
-		while (r != -1 && c != -1) {
-			positions.add(new Tile(r, c, board[r][c]));
-
-			r--;
-			c--;
-		}
-
-		return positions;
 	}
 
 	/**
