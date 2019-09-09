@@ -2,8 +2,6 @@ package view;
 
 import java.awt.Color;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -80,16 +78,15 @@ public class GUIPanel extends JPanel {
 	private void setupListeners() {
 		for (int r = 0; r < buttons[0].length; r++) {
 			for (int c = 0; c < buttons.length; c++) {
-				buttons[r][c].addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent click) {
-						// Get row and column from the buttons text
-						int row = Integer.parseInt(
-								click.getActionCommand().split(" ")[0]);
-						int col = Integer.parseInt(
-								click.getActionCommand().split(" ")[1]);
-
-						baseController.place(row, col);
-					}
+				// Add listener to the button
+				buttons[r][c].addActionListener(click -> {
+					// Get row and column from the buttons text
+					int row = Integer.parseInt(
+							click.getActionCommand().split(" ")[0]);
+					int col = Integer.parseInt(
+							click.getActionCommand().split(" ")[1]);
+					
+					baseController.place(row, col);
 				});
 			}
 		}
