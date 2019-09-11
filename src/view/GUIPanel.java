@@ -113,8 +113,6 @@ public class GUIPanel extends JPanel {
 		for (int r = 0; r < board[0].length; r++) {
 			for (int c = 0; c < board.length; c++) {
 				if (board[r][c].equals("w")) {
-//					buttons[r][c].setBackground(Color.white);
-//					buttons[r][c].setForeground(Color.white);
 					buttons[r][c].setBackground(new Color(64, 128, 75));
 					buttons[r][c].setForeground(new Color(64, 128, 75));
 					buttons[r][c].setIcon(new ImageIcon(GUIPanel.class.getResource("/view/img/wBtn.png")));
@@ -126,8 +124,6 @@ public class GUIPanel extends JPanel {
 				}
 
 				if (board[r][c].equals("b")) {
-//					buttons[r][c].setBackground(Color.black);
-//					buttons[r][c].setForeground(Color.black);
 					buttons[r][c].setBackground(new Color(64, 128, 75));
 					buttons[r][c].setForeground(new Color(64, 128, 75));
 					buttons[r][c].setIcon(new ImageIcon(GUIPanel.class.getResource("/view/img/bBtn.png")));
