@@ -1,8 +1,10 @@
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -24,6 +26,10 @@ public class GUIPanel extends JPanel {
 	private JLabel currentPlayerLbl;
 	private JLabel blackNumLbl;
 	private JLabel whiteNumLbl;
+	
+	//create separate JPanel for Game Information and Button on Grid -AL 09102019
+	private JPanel gameInfo = new JPanel();
+	private JPanel gamePlay = new JPanel();
 
 	public GUIPanel(OthelloController baseController) {
 		this.baseController = baseController;
@@ -39,16 +45,23 @@ public class GUIPanel extends JPanel {
 	}
 
 	private void setupPanel() {
+		//create separate JPanel for Game Information -AL 09102019		
+		gameInfo.setLayout(new GridLayout(1, 8, 0, 0));
+		
 		// Make the top menu labels
-		this.add(new JLabel("Move:"));
-		this.add(currentPlayerLbl);
-		this.add(new JLabel(""));
-		this.add(new JLabel("black:"));
-		this.add(blackNumLbl);
-		this.add(new JLabel("White"));
-		this.add(whiteNumLbl);
-		this.add(new JLabel(""));
+		gameInfo.add(new JLabel("Move:"));
+		gameInfo.add(currentPlayerLbl);
+		gameInfo.add(new JLabel(""));
+		gameInfo.add(new JLabel("black:"));
+		gameInfo.add(blackNumLbl);
+		gameInfo.add(new JLabel("White"));
+		gameInfo.add(whiteNumLbl);
+		gameInfo.add(new JLabel(""));
+		
+		//create a separate JPanel for Buttons on the Grid -AL 09102019
 
+		gamePlay.setLayout(new GridLayout(8, 8, 0, 0));
+		
 		// Add the buttons to the grid
 		for (int r = 0; r < buttons[0].length; r++) {
 			for (int c = 0; c < buttons.length; c++) {
@@ -63,16 +76,20 @@ public class GUIPanel extends JPanel {
 				curButton.setOpaque(true);
 
 				// Add to panel and array
-				this.add(curButton);
+				gamePlay.add(curButton);
 				buttons[r][c] = curButton;
 			}
 		}
 	}
 
 	private void setupLayout() {
-		// Make a 9x8 grid
-		setLayout(new GridLayout(9, 8, 6, 6));
+		// Make a 9x8 grid  
+		//Change game layout to Border -AL 09102019
+		setLayout(new BorderLayout(0, 0));
+		this.add(gameInfo, BorderLayout.NORTH);
+		this.add(gamePlay, BorderLayout.CENTER);
 		setBackground(new Color(64, 128, 75));
+		setBorder(getBorder());
 	}
 
 	private void setupListeners() {
@@ -91,13 +108,16 @@ public class GUIPanel extends JPanel {
 			}
 		}
 	}
-
+	// replace black and white tile with image -AL 09102019
 	public void setColors(String[][] board) {
 		for (int r = 0; r < board[0].length; r++) {
 			for (int c = 0; c < board.length; c++) {
 				if (board[r][c].equals("w")) {
-					buttons[r][c].setBackground(Color.white);
-					buttons[r][c].setForeground(Color.white);
+//					buttons[r][c].setBackground(Color.white);
+//					buttons[r][c].setForeground(Color.white);
+					buttons[r][c].setBackground(new Color(64, 128, 75));
+					buttons[r][c].setForeground(new Color(64, 128, 75));
+					buttons[r][c].setIcon(new ImageIcon(GUIPanel.class.getResource("/view/img/wBtn.png")));
 				}
 
 				if (board[r][c].equals("y")) {
@@ -106,8 +126,11 @@ public class GUIPanel extends JPanel {
 				}
 
 				if (board[r][c].equals("b")) {
-					buttons[r][c].setBackground(Color.black);
-					buttons[r][c].setForeground(Color.black);
+//					buttons[r][c].setBackground(Color.black);
+//					buttons[r][c].setForeground(Color.black);
+					buttons[r][c].setBackground(new Color(64, 128, 75));
+					buttons[r][c].setForeground(new Color(64, 128, 75));
+					buttons[r][c].setIcon(new ImageIcon(GUIPanel.class.getResource("/view/img/bBtn.png")));
 				}
 
 				if (board[r][c].equals("g")) {
