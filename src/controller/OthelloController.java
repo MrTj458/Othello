@@ -22,8 +22,7 @@ public class OthelloController {
 	public OthelloController() {
 		baseFrame = new GUIFrame(this);
 		view = baseFrame.getPanel();
-		currentColor = "b";
-
+		currentColor = "b";		
 		gameBoard = new Board();
 	}
 
@@ -50,11 +49,14 @@ public class OthelloController {
 
 			// Check for winner
 			if (gameBoard.getYellow() == 0) {
-				if (gameBoard.getBlack() > gameBoard.getWhite()) {
-					JOptionPane.showMessageDialog(null, "Black Wins!");
+				if (gameBoard.getBlack() > gameBoard.getWhite()) {					
+					view.setTitleLabel("BLACK WINS!");
+//					JOptionPane.showMessageDialog(null, "Black Wins!");
 				} else if (gameBoard.getBlack() < gameBoard.getWhite()) {
-					JOptionPane.showMessageDialog(null, "White Wins!");
+					view.setTitleLabel("WHITE WINS!");
+//					JOptionPane.showMessageDialog(null, "White Wins!");
 				} else {
+					view.setTitleLabel("TIE GAME!");
 					JOptionPane.showMessageDialog(null, "Tie Game!");
 				}
 			}
