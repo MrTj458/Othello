@@ -2,6 +2,8 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 
 import javax.swing.ImageIcon;
@@ -26,10 +28,12 @@ public class GUIPanel extends JPanel {
 	private JLabel currentPlayerLbl;
 	private JLabel blackNumLbl;
 	private JLabel whiteNumLbl;
+	private JLabel title;
 	
 	//create separate JPanel for Game Information and Button on Grid -AL 09102019
 	private JPanel gameInfo = new JPanel();
 	private JPanel gamePlay = new JPanel();
+	private JPanel gameTitle = new JPanel();	
 
 	public GUIPanel(OthelloController baseController) {
 		this.baseController = baseController;
@@ -52,11 +56,19 @@ public class GUIPanel extends JPanel {
 		gameInfo.add(new JLabel("Move:"));
 		gameInfo.add(currentPlayerLbl);
 		gameInfo.add(new JLabel(""));
-		gameInfo.add(new JLabel("black:"));
+		gameInfo.add(new JLabel("Black:"));
 		gameInfo.add(blackNumLbl);
-		gameInfo.add(new JLabel("White"));
+		gameInfo.add(new JLabel("White:"));
 		gameInfo.add(whiteNumLbl);
 		gameInfo.add(new JLabel(""));
+		
+		//create JPanel for Game Title
+		gameTitle.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		//create JLabel for Game Title
+		title = new JLabel("OTHELLO");
+		title.setFont(new Font("Tahoma", Font.BOLD, 15));
+		gameTitle.add(title);
 		
 		//create a separate JPanel for Buttons on the Grid -AL 09102019
 
@@ -86,8 +98,9 @@ public class GUIPanel extends JPanel {
 		// Make a 9x8 grid  
 		//Change game layout to Border -AL 09102019
 		setLayout(new BorderLayout(0, 0));
-		this.add(gameInfo, BorderLayout.NORTH);
-		this.add(gamePlay, BorderLayout.CENTER);
+		this.add(gameTitle, BorderLayout.NORTH);
+		this.add(gameInfo, BorderLayout.SOUTH);
+		this.add(gamePlay, BorderLayout.CENTER);		
 		setBackground(new Color(64, 128, 75));
 		setBorder(getBorder());
 	}
@@ -159,5 +172,13 @@ public class GUIPanel extends JPanel {
 
 	public void setWhiteNum(int num) {
 		whiteNumLbl.setText(Integer.toString(num));
+	}
+	
+	public JLabel getTitleLabel() {
+		return title;
+	}
+	
+	public void setTitleLabel(String txt) {
+		title.setText(txt);
 	}
 }
