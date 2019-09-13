@@ -57,7 +57,7 @@ public class OthelloController {
 //					JOptionPane.showMessageDialog(null, "White Wins!");
 				} else {
 					view.setTitleLabel("TIE GAME!");
-					JOptionPane.showMessageDialog(null, "Tie Game!");
+//					JOptionPane.showMessageDialog(null, "Tie Game!");
 				}
 			}
 		}
